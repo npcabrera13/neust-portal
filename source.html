@@ -1,0 +1,302 @@
+<br />
+<b>Notice</b>:  Undefined index: HTTP_ACCEPT in <b>/opt/lampp/htdocs/enroll/includes/Mobile_Detect.php</b> on line <b>93</b><br />
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>NEUST Online Enrolment</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icon.ico"/>
+<!--===============================================================================================-->
+<!-- <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util_admission.css">
+	<link rel="stylesheet" type="text/css" href="css/main_admission.css"> 
+<!--===============================================================================================-->
+<link rel="stylesheet" type="text/css" href="css/uploadfile.css">
+<script src="scripts/jquery-1.9.1.js"></script>
+<script src="scripts/jquery.uploadfile.min.js"></script>
+<script src="scripts/tinybox.js"></script>
+<script src="scripts/settings.js"></script>
+<script src="scripts/sweetalert.min.js" type="text/javascript"></script>
+<style>
+/* STYLE FOR TINYBOX */
+		.tbox {position:absolute; display:none; padding:14px 17px; z-index:900}
+		.tinner {padding:15px; -moz-border-radius:5px; border-radius:5px; background:#fff url(images/preload.gif) no-repeat 50% 50%; border-right:1px solid #333; border-bottom:1px solid #333}
+		.tmask {position:absolute; display:none; top:0px; left:0px; height:100%; width:100%; background:#000; z-index:800}
+		.tclose {position:absolute; top:0px; right:0px; width:30px; height:30px; cursor:pointer; background:url(images/close.png) no-repeat}
+		.tclose:hover {background-position:0 -30px}
+		
+		#error {background:#ff6969; color:#fff; text-shadow:1px 1px #cf5454; border-right:1px solid #000; border-bottom:1px solid #000; padding:0}
+		#error .tcontent {padding:10px 14px 11px; border:1px solid #ffb8b8; -moz-border-radius:5px; border-radius:5px}
+		#success {background:#2ea125; color:#fff; text-shadow:1px 1px #1b6116; border-right:1px solid #000; border-bottom:1px solid #000; padding:10; -moz-border-radius:0; border-radius:0}
+		#bluemask {background:#4195aa}
+		#frameless {padding:0}
+		#frameless .tclose {left:6px}
+		
+		/* END OF TINYBOX */
+		.server-status-box {
+  margin-top: 30px;
+  padding: 20px;
+  background: #ffffff;
+  border-left: 5px solid #007bff;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.server-status-box h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.server-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.server-item {
+  flex: 1 1 calc(48% - 10px);
+  padding: 10px 15px;
+  border-left: 5px solid var(--color);
+  background: #f9f9f9;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: inset 0 0 2px #ccc;
+}
+
+.navigate-link {
+  background: var(--color);
+  color: white;
+  padding: 4px 10px;
+  margin-left: 10px;
+  font-size: 12px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.navigate-link:hover {
+  background: #333;
+}
+
+      </style>  
+</head>
+<body>
+	<div id="loader" style="position:absolute; z-index:9999; height:100%; padding:20%; border-color:#CCCCCC;
+                            border:20%; width:100%; visibility:hidden; bottom: 150px; left:0px; text-align:center; "><img src="images/processing.gif" /></div>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+            	<div id="content">
+                        <form class="login100-form validate-form" method="post" id="loginform" action="?" >
+                            
+                                <span class="login100-form-title"><img src="images/neust_logo.png" height="100" /></span>
+                            
+                            <span class="login100-form-title p-b-30" style="font-size:22px">
+                                                        Online Enrollment System - Server 2														
+														</span>
+                            
+                            <div class="wrap-input100 validate-input" data-validate = "Input Username">
+                              <input class="input100 credentials" type="text" name="user_name" id="user_name" />
+                              <span class="focus-input100" data-placeholder="Username"></span> </div>
+                            <div class="wrap-input100 validate-input" data-validate="Enter Password">
+                                <span class="btn-show-pass">
+                                    <i class="zmdi zmdi-eye"></i>
+                                </span>
+                                <input class="input100 credentials" type="password" name="user_password"  id="user_password" />
+                                <span class="focus-input100" data-placeholder="Password"></span>
+                            </div>
+							<div id="log_div" align="center"> 
+								<!-- <div class="container-login100-form-btn"> -->
+									<div class="wrap-login100-form-btn" id="btn_login">
+										<div class="login100-form-bgbtn"></div>
+										<button class="login100-form-btn" >
+											Login
+										</button>
+									</div>
+								<!-- </div> -->
+								 
+																<!--  class="text-center p-t-115" -->
+							</div>
+                        </form>
+						<form name="rec" method="post"><input type="hidden" name="recover" /></form>
+								<div class="text-center" id="reglink">
+									<span class="txt1"><br />
+										Forgot Password? <span style="color:blue;cursor:pointer;cursor:hand;" onclick="document.forms['rec'].submit();">Click Here </span>
+									</span><br>
+								</div><br><div align="center">Campus: San Isidro Campus</div><div align="center">Course: Bachelor of Science in Information Technology</div><div><br></div>
+			
+            
+			<div class="text-center">
+                <div class="wrap-login100-form-btn" style="margin-bottom:20px">
+					<div class="login100-form-bgbtn"></div>
+					<span class="login100-form-btn" style=" cursor:hand; cursor:pointer;">
+                    <a href="http://119.93.173.77:8000?1772153074" style="font-weight:bold; color:white;">
+						CHOOSE OTHER SERVER
+                    </a>
+					</span>
+				</div>
+				<div class="text-center">
+                <div class="wrap-login100-form-btn" style="margin-bottom:20px">
+					<div class="login100-form-bgbtn"></div>
+					<span class="login100-form-btn" style=" cursor:hand; cursor:pointer;">
+                    <a href="http://119.93.173.77:8000/gradesviewer?1772153074" style="font-weight:bold; color:white;">
+						GRADES VIEWER
+                    </a>
+					</span>
+				</div>						
+			
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script>
+	var max_server = 10;let myNum = 2;	$( "#loginform" ).on( "submit", function( event ) {
+	  if (object('user_name').value!='' && object('user_password').value!='') {
+		object('log_div').innerHTML='<img src=images/loading_image.gif /> <br>Logging in... Please Wait...';
+	  }
+	});
+	
+	let myClients = [];
+function fetchUserCount(serverId, index) {
+  return fetch(`clients/${serverId}.txt`, { cache: "no-store" })
+    .then(response => {
+      if (!response.ok) throw new Error('File not found');
+      return response.text();
+    })
+    .then(count => {
+      const trimmedCount = count.trim();
+      const countElement = document.getElementById(`${serverId}-count`);
+      const anchorElement = document.getElementById(`btn${serverId}`);
+      let suf = 'Users';
+
+      if (!isNaN(trimmedCount)) {
+        if (parseInt(trimmedCount) <= 1) {
+          suf = 'User';
+        }
+      }
+
+      if (trimmedCount.toLowerCase() === "offline") {
+        countElement.textContent = "Offline";
+        if (anchorElement) anchorElement.style.display = "none";
+        myClients[index] = 999; // mark offline servers with high load
+      } else {
+        countElement.textContent = trimmedCount + ' ' + suf;
+        if (anchorElement) anchorElement.style.display = "inline-block";
+        myClients[index] = parseInt(trimmedCount);
+      }
+    })
+    .catch(() => {
+      const countElement = document.getElementById(`${serverId}-count`);
+      const anchorElement = document.getElementById(`btn${serverId}`);
+      countElement.textContent = "N/A";
+      if (anchorElement) anchorElement.style.display = "none";
+      myClients[index] = 999;
+    });
+}
+
+function updateAllServersAndSuggest() {
+  myClients = [];
+  let fetchPromises = [];
+
+  for (let i = 1; i <= max_server; i++) {
+    let serverId = `server${i}`;
+    fetchPromises.push(fetchUserCount(serverId, i - 1));
+  }
+
+  Promise.all(fetchPromises).then(() => {
+    let minIndex = myClients.indexOf(Math.min(...myClients));
+    let targetServerNum = minIndex + 1;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    if (!urlParams.has('setserver')) {
+		if (myNum!=targetServerNum) {
+			suggestServer(targetServerNum);
+		}
+    }
+  });
+}
+
+function updateAllServers() {
+  for (let i = 1; i <= max_server; i++) {
+    fetchUserCount(`server${i}`, i - 1);
+  }
+}
+
+function suggestServer(num) {
+  swal({
+    title: "Server " + num + " is the least used.",
+    text: "Would you like to navigate to that server?",
+    icon: "info",
+    buttons: {
+      cancel: "Cancel",
+      confirm: {
+        text: "Yes, navigate",
+        value: true
+      }
+    },
+  }).then((willNavigate) => {
+    if (willNavigate) {
+      const btn = document.getElementById("btnserver" + num);
+      if (btn) {
+        btn.click();
+      } else {
+        console.warn("Button with ID btnfserver" + num + " not found.");
+      }
+    }
+  });
+}
+// Initial call (with suggestion)
+updateAllServersAndSuggest();
+
+// Subsequent refreshes (no suggestion)
+setInterval(updateAllServers, 3000);
+
+
+	</script>
+</body>
+</html>

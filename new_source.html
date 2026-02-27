@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>NEUST Enrollment Portal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="images/icon.ico"/>
+  <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+  <script src="scripts/jquery-1.9.1.js"></script>
+
+  <style>
+    :root{
+      --bg-dark:#1a2236;
+      --card-bg:#242f4d;
+      --text-main:#ffffff;
+
+      --header-bg1:#0b1220;
+      --header-bg2:#0f1b33;
+      --muted:rgba(233,238,247,.75);
+      --line:rgba(255,255,255,.10);
+      --notice-bg:rgba(255,255,255,.06);
+      --notice-line:rgba(255,255,255,.12);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    html, body{
+      height:100%;
+      width:100%;
+      font-family:'Segoe UI', Arial, sans-serif;
+      background-color:var(--bg-dark);
+      color:var(--text-main);
+      overflow:hidden;
+    }
+
+    body{
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* Header (responsive, auto height) */
+    .header{
+      background:linear-gradient(90deg,var(--header-bg1),var(--header-bg2));
+      border-bottom:1px solid var(--line);
+      padding:14px 14px 12px 14px;
+      flex-shrink:0;
+    }
+
+    .header-inner{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .brand img{
+      width:54px;
+      height:54px;
+      object-fit:contain;
+      flex:0 0 auto;
+      filter:drop-shadow(0 10px 18px rgba(0,0,0,.35));
+    }
+
+    .brand-text{
+      min-width:0;
+      line-height:1.15;
+    }
+
+    .brand-title{
+      font-size:1.15rem;
+      font-weight:900;
+      letter-spacing:1px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .brand-subtitle{
+      margin-top:4px;
+      font-size:.85rem;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:0 0 auto;
+    }
+
+    .btn-grades{
+      text-decoration:none;
+      font-weight:900;
+      letter-spacing:.2px;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.10);
+      color:#e9eef7;
+      transition:transform .12s ease, background .12s ease, opacity .12s ease;
+      white-space:nowrap;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+
+    .btn-grades:hover{
+      background:rgba(255,255,255,.14);
+      transform:translateY(-1px);
+      opacity:.98;
+      color:#ffffff;
+    }
+
+    .notice{
+      max-width:1100px;
+      margin:12px auto 0;
+      padding:12px 14px;
+      border-radius:16px;
+      background:var(--notice-bg);
+      border:1px solid var(--notice-line);
+    }
+
+    .notice-title{
+      font-weight:900;
+      font-size:.95rem;
+      letter-spacing:.2px;
+      margin-bottom:6px;
+    }
+
+    .notice-body{
+      font-size:.85rem;
+      color:rgba(233,238,247,.86);
+      line-height:1.45;
+    }
+
+    .notice-meta{
+      margin-top:8px;
+      font-size:.78rem;
+      color:rgba(233,238,247,.65);
+    }
+
+    /* Scrollable Content Area */
+    .main-container{
+      flex:1;
+      overflow-y:auto;
+      padding:10px 15px 30px 15px;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    /* Responsive Grid System */
+    .server-grid{
+      display:grid;
+      gap:15px;
+      grid-template-columns:repeat(5,1fr);
+    }
+
+    @media (max-width:1200px){ .server-grid{grid-template-columns:repeat(3,1fr);} }
+    @media (max-width:800px){ .server-grid{grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:480px){
+      .server-grid{grid-template-columns:1fr;padding-bottom:20px;}
+    }
+
+    @media (max-width:576px){
+      .header-inner{
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .header-actions{
+        width:100%;
+      }
+      .btn-grades{
+        width:100%;
+        text-align:center;
+      }
+      .brand img{
+        width:48px;
+        height:48px;
+      }
+      .brand-title{
+        font-size:1.05rem;
+      }
+    }
+
+    .server-card{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:20px;
+      border:1px solid rgba(255,255,255,0.05);
+      border-top:4px solid var(--s-color);
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+    }
+
+    .server-tag{font-size:0.7rem;color:#94a3b8;font-weight:700;text-transform:uppercase;}
+    .server-name{font-size:1.4rem;font-weight:800;margin-bottom:15px;}
+
+    .count-val{font-size:3.5rem;font-weight:900;color:var(--s-color);line-height:1;}
+    .count-label{font-size:0.75rem;color:#64748b;font-weight:700;margin-bottom:20px;}
+
+    .btn-choose{
+      width:100%;
+      background:var(--s-color);
+      color:white !important;
+      padding:12px;
+      border-radius:8px;
+      font-weight:800;
+      text-decoration:none;
+      font-size:0.9rem;
+      transition:opacity 0.2s;
+      border:0;
+      cursor:pointer;
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .btn-choose:hover{opacity:0.9;}
+
+    .fastest-badge{
+      position:absolute;
+      top:12px;
+      right:12px;
+      background:#10b981;
+      font-size:0.65rem;
+      padding:3px 8px;
+      border-radius:5px;
+      font-weight:900;
+      display:none;
+    }
+
+    .offline{opacity:0.4;filter:grayscale(0.8);pointer-events:none;}
+
+    /* Simple modal (no bootstrap JS needed) */
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      padding:18px;
+      z-index:9999;
+    }
+
+    .modal-overlay.show{display:flex;}
+
+    .modal-box{
+      width:min(520px,100%);
+      background:#111827;
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:14px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.45);
+      overflow:hidden;
+    }
+
+    .modal-head{
+      padding:14px 16px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(255,255,255,0.03);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+
+    .modal-title{
+      font-weight:900;
+      font-size:1rem;
+      letter-spacing:0.4px;
+      margin:0;
+    }
+
+    .modal-close{
+      border:0;
+      background:transparent;
+      color:#e5e7eb;
+      font-size:22px;
+      line-height:1;
+      cursor:pointer;
+      padding:0 6px;
+    }
+
+    .modal-body{padding:16px;}
+
+    .modal-body label{
+      font-size:0.85rem;
+      font-weight:800;
+      color:#e5e7eb;
+      margin-bottom:6px;
+    }
+
+    .modal-body select{
+      width:100%;
+      background:#0b1220;
+      border:1px solid rgba(255,255,255,0.12);
+      color:#e5e7eb;
+      padding:10px 12px;
+      border-radius:10px;
+      outline:none;
+    }
+
+    .modal-body select:disabled{
+      opacity:0.55;
+      cursor:not-allowed;
+    }
+
+    .modal-actions{
+      padding:14px 16px;
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      border-top:1px solid rgba(255,255,255,0.06);
+      background:rgba(255,255,255,0.02);
+    }
+
+    .btn-ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.18);
+      color:#e5e7eb;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .btn-nav{
+      background:#22c55e;
+      border:0;
+      color:#08210f;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:900;
+      text-decoration:none;
+      display:none;
+    }
+
+    .btn-nav.show{display:inline-flex;align-items:center;}
+    .help-text{font-size:0.8rem;color:#94a3b8;margin-top:8px;}
+    .err-text{font-size:0.8rem;color:#fca5a5;margin-top:8px;display:none;}
+    .err-text.show{display:block;}
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="images/neust_logo.png" alt="NEUST">
+        <div class="brand-text">
+          <div class="brand-title">ENROLLMENT SERVER PORTAL</div>
+          <div class="brand-subtitle">Choose a server, then select your campus and program</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a class="btn-grades" href="/gradesviewer/">Grades Viewing and COR Download</a>
+      </div>
+    </div>
+
+    <div class="notice">
+      <div class="notice-title">Notice and What’s New</div>
+      <div class="notice-body">
+        Grades and COR Downloading is now available. You may log in to view your A.Y 25-26 1st Semester Grades and Download Certificate of Registration for A.Y 25-26 1st Semester.
+      </div>
+      <div class="notice-meta">
+        Updated: <span id="noticeDate"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div id="server-list" class="server-grid"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="serverModal" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2 class="modal-title">Choose Campus and Program</h2>
+        <button class="modal-close" type="button" id="modalCloseBtn" aria-label="Close">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group mb-3">
+          <label for="campusSelect">Campus</label>
+          <select id="campusSelect">
+            <option value="">Select campus</option>
+          </select>
+          <div class="help-text"></div>
+          <div id="dataErr" class="err-text"></div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="serverSelect">Server</label>
+          <select id="serverSelect">
+            <option value="">Select server</option>
+          </select>
+          <div class="help-text">You may choose any available server before navigating</div>
+        </div>
+
+        <div class="form-group">
+          <label for="programSelect">Program</label>
+          <select id="programSelect" disabled>
+            <option value="">Select program</option>
+          </select>
+          <div class="help-text">Program list depends on selected campus</div>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn-ghost" id="modalCancelBtn">Cancel</button>
+        <a href="#" id="navigateBtn" class="btn-nav">NAVIGATE TO SERVER</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      var el = document.getElementById("noticeDate");
+      if(!el) return;
+      var d = new Date();
+      el.textContent = d.toLocaleDateString(undefined, { year:"numeric", month:"short", day:"2-digit" });
+    })();
+  </script>
+<script>
+function _0x3a35(_0x4f6377,_0x481cc5){_0x4f6377=_0x4f6377-0x18c;const _0x1b08fa=_0x1b08();let _0x3a35c6=_0x1b08fa[_0x4f6377];return _0x3a35c6;}const _0x455015=_0x3a35;(function(_0x52bfd2,_0x2c3563){const _0x3090ad=_0x3a35,_0x5a0d09=_0x52bfd2();while(!![]){try{const _0x423f23=parseInt(_0x3090ad(0x1b5))/0x1*(parseInt(_0x3090ad(0x1d0))/0x2)+-parseInt(_0x3090ad(0x1b7))/0x3+parseInt(_0x3090ad(0x1be))/0x4+-parseInt(_0x3090ad(0x19b))/0x5+-parseInt(_0x3090ad(0x1dc))/0x6+parseInt(_0x3090ad(0x1b6))/0x7*(parseInt(_0x3090ad(0x1f6))/0x8)+parseInt(_0x3090ad(0x19e))/0x9*(parseInt(_0x3090ad(0x1c2))/0xa);if(_0x423f23===_0x2c3563)break;else _0x5a0d09['push'](_0x5a0d09['shift']());}catch(_0x4f7548){_0x5a0d09['push'](_0x5a0d09['shift']());}}}(_0x1b08,0x9db33));const max_server=0xa,list_port=[0x50,0x51,0x54,0x1f6a,0x56,0x58,0x59,0x1f69,0x1f68,0x1f67,0x1f64,0x1f63,0x1f62],list_color=[_0x455015(0x1d5),_0x455015(0x1c6),_0x455015(0x19f),_0x455015(0x1d1),_0x455015(0x1a4),_0x455015(0x1c5),_0x455015(0x1ab),_0x455015(0x1f0),_0x455015(0x194),_0x455015(0x1c4),'#17a2b8;',_0x455015(0x1ab)];let serverData=new Array(max_server)[_0x455015(0x1c9)](0x270f);function _0x1b08(){const _0x1cdef7=['offline','<option\x20value=\x22\x22>Select\x20campus</option>','none','24EFtgVz','visibility','textContent','GRADUATE\x20SCHOOL\x20REGISTRATION','catch','setAttribute','text','server-list','localeCompare','change','aria-hidden','CHOOSE\x20SERVER','forEach','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','programSelect','navigateBtn','#e83e8c;','contains','remove','add','classList','status','encode','731035srjVhc','campusid','\x20(OFFLINE)','99miOgXA','#ffc107;','has','all','\x22\x20style=\x22--s-color:\x20','programs','#dc3545;','\x20disabled','disabled','<option\x20value=\x22','style','num','get','#20c997;','trim','then','campusprograms','btn','HTTP\x20','modalCloseBtn','badge',':::','selectedIndex','107746jLwnXm','2047164MNKixA','1787595AUVxNF','set','clients/server','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>','floor','Master\x20and\x20Doctorate\x20Degree\x20Admission','\x22\x20data-href=\x22','2421712gSWEuq','campusname','.txt','href','345250pseAlc','display','#fd7e14;','#6f42c1;','#28a745;','serverModal','min','fill','toLowerCase','options','http://58.69.126.78:','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22fastest-badge\x22\x20id=\x22badge','replace','\x22>FASTEST</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22server-tag\x22>','6uFUatm','#17a2b8;','OFF','false','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22server-card\x22\x20id=\x22card','#007bff;','<option\x20value=\x22\x22>Select\x20server</option>','\x22\x20data-serverid=\x22','innerHTML','no-store','json','\x22>--</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22count-label\x22>ACTIVE\x20USERS</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20type=\x22button\x22\x20class=\x22btn-choose\x22\x20id=\x22btn','4786716uLrPmN','click','dataErr','getAttribute','.fastest-badge','data-serverid','<option\x20value=\x22\x22>Select\x20program</option>','addEventListener','card','getElementById','</option>','show','modalCancelBtn','Escape','values','querySelectorAll','now','progname','\x20selected','value','#6610f2;','push','data-href'];_0x1b08=function(){return _0x1cdef7;};return _0x1b08();}function getServerHrefById(_0x542bfe){const _0x404b98=_0x455015,_0x4e442e=parseInt(_0x542bfe,0xa);if(isNaN(_0x4e442e)||_0x4e442e<0x1||_0x4e442e>max_server)return'';return _0x404b98(0x1cc)+list_port[_0x4e442e]+'/enroll/?setserver';}function populateServerSelect(_0x58c5d0){const _0x5953e0=_0x455015;let _0x3bf5db=_0x5953e0(0x1d6);for(let _0x581ba5=0x1;_0x581ba5<=max_server;_0x581ba5++){const _0x191187=serverData[_0x581ba5-0x1],_0x43139b=_0x191187>=0x1869f,_0x35404f=_0x43139b?_0x5953e0(0x1a5):'',_0x5eaef8=String(_0x581ba5)===String(_0x58c5d0)?_0x5953e0(0x1ee):'',_0x4f999f=_0x43139b?'SERVER\x20'+_0x581ba5+_0x5953e0(0x19d):'SERVER\x20'+_0x581ba5+'\x20('+_0x191187+'\x20users)';_0x3bf5db+=_0x5953e0(0x1a7)+_0x581ba5+'\x22'+_0x35404f+_0x5eaef8+'>'+_0x4f999f+'</option>';}serverSelect[_0x5953e0(0x1d8)]=_0x3bf5db;}let selectedServerHref='',selectedServerId='',programsData=null,campusMap=new Map();const modalEl=document[_0x455015(0x1e5)](_0x455015(0x1c7)),campusSelect=document[_0x455015(0x1e5)]('campusSelect'),programSelect=document[_0x455015(0x1e5)](_0x455015(0x192)),serverSelect=document['getElementById']('serverSelect'),navigateBtn=document[_0x455015(0x1e5)](_0x455015(0x193)),dataErr=document[_0x455015(0x1e5)](_0x455015(0x1de));function openModal(_0x36a2ad,_0x2fb1bb){const _0x4ff980=_0x455015;_0x2fb1bb===undefined&&_0x36a2ad!==undefined&&_0x36a2ad!==null&&String(_0x36a2ad)[_0x4ff980(0x1ac)]()!==''&&(_0x2fb1bb=_0x36a2ad,_0x36a2ad=''),selectedServerId=_0x2fb1bb!==undefined&&_0x2fb1bb!==null?String(_0x2fb1bb):'',selectedServerHref=_0x36a2ad&&String(_0x36a2ad)[_0x4ff980(0x1ac)]()!==''?String(_0x36a2ad):getServerHrefById(selectedServerId),resetModalSelection(),populateServerSelect(selectedServerId),modalEl[_0x4ff980(0x198)][_0x4ff980(0x197)](_0x4ff980(0x1e7)),modalEl[_0x4ff980(0x1fb)](_0x4ff980(0x18e),_0x4ff980(0x1d3)),loadProgramsOnce();}function closeModal(){const _0x262aac=_0x455015;modalEl['classList'][_0x262aac(0x196)](_0x262aac(0x1e7)),modalEl[_0x262aac(0x1fb)]('aria-hidden','true'),selectedServerHref='',selectedServerId='';}function resetModalSelection(){const _0x39c355=_0x455015;campusSelect[_0x39c355(0x1ef)]='',programSelect[_0x39c355(0x1d8)]=_0x39c355(0x1e2),programSelect[_0x39c355(0x1a6)]=!![],serverSelect[_0x39c355(0x1ef)]=selectedServerId||'',navigateBtn[_0x39c355(0x198)][_0x39c355(0x196)](_0x39c355(0x1e7)),navigateBtn[_0x39c355(0x1fb)](_0x39c355(0x1c1),'#');}function buildUI(){const _0x47b44d=_0x455015,_0x441199=document[_0x47b44d(0x1e5)](_0x47b44d(0x1fd));for(let _0x223452=0x1;_0x223452<=max_server;_0x223452++){let _0x4e12ea='ENROLLMENT',_0x115076=_0x47b44d(0x18f);_0x223452===0x1&&(_0x4e12ea=_0x47b44d(0x1f9),_0x115076=_0x47b44d(0x1bc));const _0x2f9f5d=_0x47b44d(0x1cc)+list_port[_0x223452]+'/enroll/?setserver';_0x441199[_0x47b44d(0x1d8)]+=_0x47b44d(0x1d4)+_0x223452+_0x47b44d(0x1a2)+list_color[_0x223452-0x1]+_0x47b44d(0x1cd)+_0x223452+_0x47b44d(0x1cf)+_0x4e12ea+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22server-name\x22>SERVER\x20'+_0x223452+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22count-val\x22\x20id=\x22num'+_0x223452+_0x47b44d(0x1db)+_0x223452+_0x47b44d(0x1bd)+_0x2f9f5d+_0x47b44d(0x1d7)+_0x223452+_0x47b44d(0x191)+_0x115076+_0x47b44d(0x1ba);}for(let _0x1d9eca=0x1;_0x1d9eca<=max_server;_0x1d9eca++){const _0x58da2f=document[_0x47b44d(0x1e5)](_0x47b44d(0x1af)+_0x1d9eca);if(!_0x58da2f)continue;_0x58da2f[_0x47b44d(0x1e3)](_0x47b44d(0x1dd),function(){const _0x57bc70=_0x47b44d,_0x3d1885=this[_0x57bc70(0x1df)](_0x57bc70(0x1f2))||'',_0x4ac490=this[_0x57bc70(0x1df)](_0x57bc70(0x1e1))||'';openModal(_0x3d1885,_0x4ac490);});}}async function loadProgramsOnce(){const _0x2f4dbf=_0x455015;if(programsData)return;try{dataErr['classList'][_0x2f4dbf(0x196)](_0x2f4dbf(0x1e7));var _0x4f606e=_0x2f4dbf(0x1ae),_0x2c91e7='programs.json';const _0x24b344=await fetch(_0x4f606e+'/'+_0x2c91e7,{'cache':_0x2f4dbf(0x1d9)});if(!_0x24b344['ok'])throw new Error(_0x2f4dbf(0x1b0)+_0x24b344[_0x2f4dbf(0x199)]);programsData=await _0x24b344[_0x2f4dbf(0x1da)](),campusMap=new Map();for(const _0x1ae92b of programsData){const _0x3fbf0f=String(_0x1ae92b[_0x2f4dbf(0x19c)]||'')[_0x2f4dbf(0x1ac)](),_0x6ba3ed=String(_0x1ae92b['campusname']||'')['trim'](),_0x507cab=String(_0x1ae92b['progid']||'')['trim'](),_0x51724f=String(_0x1ae92b['progname']||'')[_0x2f4dbf(0x1ac)]();if(!_0x3fbf0f||!_0x6ba3ed||!_0x507cab||!_0x51724f)continue;!campusMap[_0x2f4dbf(0x1a0)](_0x3fbf0f)&&campusMap[_0x2f4dbf(0x1b8)](_0x3fbf0f,{'campusid':_0x3fbf0f,'campusname':_0x6ba3ed,'programs':[]}),campusMap[_0x2f4dbf(0x1aa)](_0x3fbf0f)[_0x2f4dbf(0x1a3)][_0x2f4dbf(0x1f1)]({'progid':_0x507cab,'progname':_0x51724f});}for(const _0x11cac6 of campusMap[_0x2f4dbf(0x1ea)]()){_0x11cac6[_0x2f4dbf(0x1a3)]['sort']((_0x59ea01,_0xece132)=>_0x59ea01[_0x2f4dbf(0x1ed)]['localeCompare'](_0xece132[_0x2f4dbf(0x1ed)]));}const _0xca1eb9=Array['from'](campusMap['values']())['sort']((_0x2239de,_0x4d99ab)=>_0x2239de['campusname'][_0x2f4dbf(0x18c)](_0x4d99ab['campusname']));let _0x4bd601=_0x2f4dbf(0x1f4);for(const _0x168ffe of _0xca1eb9){_0x4bd601+=_0x2f4dbf(0x1a7)+_0x168ffe['campusid']+'\x22>'+_0x168ffe[_0x2f4dbf(0x1bf)]+_0x2f4dbf(0x1e6);}campusSelect['innerHTML']=_0x4bd601;}catch(_0x1a1933){programsData=null,campusMap=new Map(),dataErr[_0x2f4dbf(0x198)][_0x2f4dbf(0x197)]('show');}}function base64UrlEncodeFromUtf8(_0x528660){const _0x2106de=_0x455015,_0x325695=new TextEncoder()[_0x2106de(0x19a)](_0x528660);let _0x34edce='';for(let _0x210dea=0x0;_0x210dea<_0x325695['length'];_0x210dea++)_0x34edce+=String['fromCharCode'](_0x325695[_0x210dea]);const _0x16e5e0=btoa(_0x34edce);return _0x16e5e0[_0x2106de(0x1ce)](/\+/g,'-')[_0x2106de(0x1ce)](/\//g,'_')['replace'](/=+$/g,'');}function sanitizePart(_0x41dae2){const _0x172920=_0x455015,_0x513f37=String(_0x41dae2===undefined||_0x41dae2===null?'':_0x41dae2)['trim']();return _0x513f37[_0x172920(0x1ce)](/:::/g,'\x20');}function buildAccessKey(_0x44a402,_0x274b53,_0x5da49c,_0x42ef91,_0x154752){const _0x5e6740=_0x455015,_0x48b116=Math[_0x5e6740(0x1bb)](Date[_0x5e6740(0x1ec)]()/0x3e8)+0xf*0x3c,_0x5edfd5=sanitizePart(_0x44a402)+_0x5e6740(0x1b3)+sanitizePart(_0x274b53)+_0x5e6740(0x1b3)+sanitizePart(_0x5da49c)+_0x5e6740(0x1b3)+String(_0x48b116)+':::'+sanitizePart(_0x42ef91)+_0x5e6740(0x1b3)+sanitizePart(_0x154752);return{'accesskey':base64UrlEncodeFromUtf8(_0x5edfd5),'raw':_0x5edfd5,'dtexpire':_0x48b116};}campusSelect[_0x455015(0x1e3)](_0x455015(0x18d),function(){const _0x4dbd21=_0x455015,_0x26f06d=this[_0x4dbd21(0x1ef)];navigateBtn[_0x4dbd21(0x198)][_0x4dbd21(0x196)]('show');if(!_0x26f06d||!campusMap['has'](_0x26f06d)){programSelect[_0x4dbd21(0x1d8)]='<option\x20value=\x22\x22>Select\x20program</option>',programSelect[_0x4dbd21(0x1a6)]=!![];return;}const _0x1ad2ff=campusMap['get'](_0x26f06d);let _0x5c8e83=_0x4dbd21(0x1e2);for(const _0x30eda7 of _0x1ad2ff[_0x4dbd21(0x1a3)]){_0x5c8e83+='<option\x20value=\x22'+_0x30eda7['progid']+'\x22>'+_0x30eda7[_0x4dbd21(0x1ed)]+_0x4dbd21(0x1e6);}programSelect[_0x4dbd21(0x1d8)]=_0x5c8e83,programSelect[_0x4dbd21(0x1a6)]=![];}),serverSelect[_0x455015(0x1e3)](_0x455015(0x18d),function(){const _0x2af918=_0x455015;selectedServerId=this[_0x2af918(0x1ef)]||'',selectedServerHref=getServerHrefById(selectedServerId),navigateBtn[_0x2af918(0x198)][_0x2af918(0x196)](_0x2af918(0x1e7)),navigateBtn[_0x2af918(0x1fb)](_0x2af918(0x1c1),'#');}),programSelect[_0x455015(0x1e3)](_0x455015(0x18d),function(){const _0x469527=_0x455015,_0x5c5866=campusSelect[_0x469527(0x1ef)],_0x4237a9=this['value'];if(!selectedServerHref||!selectedServerId||!_0x5c5866||!_0x4237a9){navigateBtn[_0x469527(0x198)][_0x469527(0x196)]('show'),navigateBtn[_0x469527(0x1fb)](_0x469527(0x1c1),'#');return;}const _0x3b7920=campusSelect[_0x469527(0x1cb)][campusSelect[_0x469527(0x1b4)]]?campusSelect[_0x469527(0x1cb)][campusSelect['selectedIndex']][_0x469527(0x1fc)]:'',_0x4e3106=programSelect[_0x469527(0x1cb)][programSelect[_0x469527(0x1b4)]]?programSelect[_0x469527(0x1cb)][programSelect[_0x469527(0x1b4)]][_0x469527(0x1fc)]:'',{accesskey:_0x17d521}=buildAccessKey(_0x5c5866,_0x4237a9,selectedServerId,_0x3b7920,_0x4e3106),_0x54083d=selectedServerHref['includes']('?')?'&':'?',_0x2201e0=selectedServerHref+_0x54083d+'accesskey='+encodeURIComponent(_0x17d521);navigateBtn[_0x469527(0x1fb)]('href',_0x2201e0),navigateBtn['classList'][_0x469527(0x197)]('show');}),document[_0x455015(0x1e5)](_0x455015(0x1b1))[_0x455015(0x1e3)](_0x455015(0x1dd),closeModal),document[_0x455015(0x1e5)](_0x455015(0x1e8))[_0x455015(0x1e3)]('click',closeModal),modalEl['addEventListener']('click',function(_0x18ec2a){if(_0x18ec2a['target']===modalEl)closeModal();}),document[_0x455015(0x1e3)]('keydown',function(_0x43a27a){const _0x5f441f=_0x455015;if(_0x43a27a['key']===_0x5f441f(0x1e9)&&modalEl[_0x5f441f(0x198)][_0x5f441f(0x195)](_0x5f441f(0x1e7)))closeModal();});async function updateData(){const _0x4b2c16=_0x455015;let _0x2f8255=[];for(let _0x2662d6=0x1;_0x2662d6<=max_server;_0x2662d6++){_0x2f8255['push'](fetch(_0x4b2c16(0x1b9)+_0x2662d6+_0x4b2c16(0x1c0),{'cache':_0x4b2c16(0x1d9)})[_0x4b2c16(0x1ad)](_0x7abebb=>_0x7abebb['text']())[_0x4b2c16(0x1ad)](_0x27347d=>{const _0x5137c4=_0x4b2c16,_0x43d7ef=_0x27347d[_0x5137c4(0x1ac)](),_0x9546d5=parseInt(_0x43d7ef),_0x509135=document[_0x5137c4(0x1e5)](_0x5137c4(0x1a9)+_0x2662d6),_0x1b2f48=document[_0x5137c4(0x1e5)](_0x5137c4(0x1e4)+_0x2662d6);_0x43d7ef[_0x5137c4(0x1ca)]()===_0x5137c4(0x1f3)||isNaN(_0x9546d5)?(_0x509135[_0x5137c4(0x1f8)]=_0x5137c4(0x1d2),_0x1b2f48[_0x5137c4(0x198)][_0x5137c4(0x197)](_0x5137c4(0x1f3)),serverData[_0x2662d6-0x1]=0x1869f):(_0x509135[_0x5137c4(0x1f8)]=_0x9546d5,_0x1b2f48[_0x5137c4(0x198)][_0x5137c4(0x196)]('offline'),serverData[_0x2662d6-0x1]=_0x9546d5),!isNaN(_0x9546d5)&&_0x9546d5>0x1f4?document[_0x5137c4(0x1e5)](_0x5137c4(0x1af)+_0x2662d6)[_0x5137c4(0x1a8)]['visibility']='hidden':document[_0x5137c4(0x1e5)]('btn'+_0x2662d6)[_0x5137c4(0x1a8)][_0x5137c4(0x1f7)]='visible';})[_0x4b2c16(0x1fa)](()=>{serverData[_0x2662d6-0x1]=0x1869f;}));}await Promise[_0x4b2c16(0x1a1)](_0x2f8255);const _0x2a726a=Math[_0x4b2c16(0x1c8)](...serverData);document[_0x4b2c16(0x1eb)](_0x4b2c16(0x1e0))[_0x4b2c16(0x190)](_0x1b65a1=>_0x1b65a1[_0x4b2c16(0x1a8)][_0x4b2c16(0x1c3)]=_0x4b2c16(0x1f5));_0x2a726a<0x270f&&(document[_0x4b2c16(0x1e5)](_0x4b2c16(0x1b2)+(serverData['indexOf'](_0x2a726a)+0x1))[_0x4b2c16(0x1a8)]['display']='block');if(modalEl[_0x4b2c16(0x198)][_0x4b2c16(0x195)](_0x4b2c16(0x1e7))){const _0x17a4f6=serverSelect[_0x4b2c16(0x1ef)]||selectedServerId||'';populateServerSelect(_0x17a4f6),_0x17a4f6&&(selectedServerId=_0x17a4f6,selectedServerHref=getServerHrefById(selectedServerId));}}buildUI(),updateData(),setInterval(updateData,0x1388);
+</script>
+</body>
+</html>

@@ -1,0 +1,578 @@
+[
+    {
+      "campusid": 3,
+      "campusname": "Atate Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 3,
+      "campusname": "Atate Campus",
+      "progid": 1014,
+      "progname": "Bachelor of Science in Entrepreneurship"
+    },
+    {
+      "campusid": 3,
+      "campusname": "Atate Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 7,
+      "campusname": "Carranglan Campus",
+      "progid": 1001,
+      "progname": "Bachelor of Elementary Education"
+    },
+    {
+      "campusid": 7,
+      "campusname": "Carranglan Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 7,
+      "campusname": "Carranglan Campus",
+      "progid": 1014,
+      "progname": "Bachelor of Science in Entrepreneurship"
+    },
+    {
+      "campusid": 7,
+      "campusname": "Carranglan Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 4,
+      "campusname": "Fort Magsaysay Campus",
+      "progid": 1029,
+      "progname": "Accelerated Vocational Training Program"
+    },
+    {
+      "campusid": 4,
+      "campusname": "Fort Magsaysay Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 4,
+      "campusname": "Fort Magsaysay Campus",
+      "progid": 1026,
+      "progname": "Junior High School"
+    },
+    {
+      "campusid": 5,
+      "campusname": "Gabaldon Campus",
+      "progid": 1001,
+      "progname": "Bachelor of Elementary Education"
+    },
+    {
+      "campusid": 5,
+      "campusname": "Gabaldon Campus",
+      "progid": 1005,
+      "progname": "Bachelor of Science in Agriculture"
+    },
+    {
+      "campusid": 5,
+      "campusname": "Gabaldon Campus",
+      "progid": 1017,
+      "progname": "Bachelor of Science in Hospitality Management"
+    },
+    {
+      "campusid": 5,
+      "campusname": "Gabaldon Campus",
+      "progid": 1018,
+      "progname": "Bachelor of Science in Hotel and Restaurant Management"
+    },
+    {
+      "campusid": 5,
+      "campusname": "Gabaldon Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 5,
+      "campusname": "Gabaldon Campus",
+      "progid": 1023,
+      "progname": "Bachelor of Secondary Education"
+    },
+    {
+      "campusid": 5,
+      "campusname": "Gabaldon Campus",
+      "progid": 1026,
+      "progname": "Junior High School"
+    },
+    {
+      "campusid": 5,
+      "campusname": "Gabaldon Campus",
+      "progid": 1042,
+      "progname": "Master of Science in Agriculture"
+    },
+    {
+      "campusid": 5,
+      "campusname": "Gabaldon Campus",
+      "progid": 1027,
+      "progname": "SENIOR HIGH SCHOOL"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1029,
+      "progname": "Accelerated Vocational Training Program"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1052,
+      "progname": "Bachelor of Arts in Literary and Cultural Studies"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1002,
+      "progname": "Bachelor of Industrial Technology"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1007,
+      "progname": "Bachelor of Science in Biology"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1009,
+      "progname": "Bachelor of Science in Chemistry"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1015,
+      "progname": "Bachelor of Science in Environmental Science"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1016,
+      "progname": "Bachelor of Science in Food Technology"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1021,
+      "progname": "Bachelor of Science in Nursing"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1022,
+      "progname": "Bachelor of Science in Psychology"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1054,
+      "progname": "Doctor of Medicine"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1047,
+      "progname": "Electronic And Communication Engineering Technology\t\t\t\t\t"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1026,
+      "progname": "Junior High School"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1027,
+      "progname": "SENIOR HIGH SCHOOL"
+    },
+    {
+      "campusid": 1,
+      "campusname": "Gen. Tinio St. Campus",
+      "progid": 1044,
+      "progname": "Technical Vocational Training Program"
+    },
+    {
+      "campusid": 8,
+      "campusname": "Papaya Campus",
+      "progid": 1001,
+      "progname": "Bachelor of Elementary Education"
+    },
+    {
+      "campusid": 8,
+      "campusname": "Papaya Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 8,
+      "campusname": "Papaya Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 8,
+      "campusname": "Papaya Campus",
+      "progid": 1023,
+      "progname": "Bachelor of Secondary Education"
+    },
+    {
+      "campusid": 9,
+      "campusname": "Peñaranda Campus",
+      "progid": 1001,
+      "progname": "Bachelor of Elementary Education"
+    },
+    {
+      "campusid": 9,
+      "campusname": "Peñaranda Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 9,
+      "campusname": "Peñaranda Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 9,
+      "campusname": "Peñaranda Campus",
+      "progid": 1023,
+      "progname": "Bachelor of Secondary Education"
+    },
+    {
+      "campusid": 10,
+      "campusname": "San Antonio Campus",
+      "progid": 1001,
+      "progname": "Bachelor of Elementary Education"
+    },
+    {
+      "campusid": 10,
+      "campusname": "San Antonio Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 10,
+      "campusname": "San Antonio Campus",
+      "progid": 1014,
+      "progname": "Bachelor of Science in Entrepreneurship"
+    },
+    {
+      "campusid": 10,
+      "campusname": "San Antonio Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 6,
+      "campusname": "San Isidro Campus",
+      "progid": 1001,
+      "progname": "Bachelor of Elementary Education"
+    },
+    {
+      "campusid": 6,
+      "campusname": "San Isidro Campus",
+      "progid": 1003,
+      "progname": "Bachelor of Physical Education"
+    },
+    {
+      "campusid": 6,
+      "campusname": "San Isidro Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 6,
+      "campusname": "San Isidro Campus",
+      "progid": 1014,
+      "progname": "Bachelor of Science in Entrepreneurship"
+    },
+    {
+      "campusid": 6,
+      "campusname": "San Isidro Campus",
+      "progid": 1045,
+      "progname": "Bachelor of Science in Industrial Education"
+    },
+    {
+      "campusid": 6,
+      "campusname": "San Isidro Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 6,
+      "campusname": "San Isidro Campus",
+      "progid": 1023,
+      "progname": "Bachelor of Secondary Education"
+    },
+    {
+      "campusid": 6,
+      "campusname": "San Isidro Campus",
+      "progid": 1026,
+      "progname": "Junior High School"
+    },
+    {
+      "campusid": 11,
+      "campusname": "San Leonardo Campus",
+      "progid": 1001,
+      "progname": "Bachelor of Elementary Education"
+    },
+    {
+      "campusid": 11,
+      "campusname": "San Leonardo Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 11,
+      "campusname": "San Leonardo Campus",
+      "progid": 1017,
+      "progname": "Bachelor of Science in Hospitality Management"
+    },
+    {
+      "campusid": 11,
+      "campusname": "San Leonardo Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 11,
+      "campusname": "San Leonardo Campus",
+      "progid": 1023,
+      "progname": "Bachelor of Secondary Education"
+    },
+    {
+      "campusid": 14,
+      "campusname": "Sto. Domingo Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1055,
+      "progname": "Bachelor of Early Childhood Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1001,
+      "progname": "Bachelor of Elementary Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1003,
+      "progname": "Bachelor of Physical Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1004,
+      "progname": "Bachelor of Public Administration"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1006,
+      "progname": "Bachelor of Science in Architecture"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1010,
+      "progname": "Bachelor of Science in Civil Engineering"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1011,
+      "progname": "Bachelor of Science in Criminology"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1053,
+      "progname": "Bachelor of Science in Data Science"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1012,
+      "progname": "Bachelor of Science in Electrical Engineering"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1014,
+      "progname": "Bachelor of Science in Entrepreneurship"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1017,
+      "progname": "Bachelor of Science in Hospitality Management"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1048,
+      "progname": "Bachelor of Science in Hotel and Restaurant Management"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1045,
+      "progname": "Bachelor of Science in Industrial Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1013,
+      "progname": "Bachelor of Science in Mechanical Engineering"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1025,
+      "progname": "Bachelor of Science in Tourism Management"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1023,
+      "progname": "Bachelor of Secondary Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1049,
+      "progname": "Bachelor of Special Needs Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1046,
+      "progname": "Bachelor of Technology and Livelihood Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1030,
+      "progname": "Certificate In Professional Teacher Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1051,
+      "progname": "Certificate in Physical Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1031,
+      "progname": "Doctor of Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1032,
+      "progname": "Doctor of Philosophy"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1035,
+      "progname": "Master Of Arts In Industrial Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1038,
+      "progname": "Master Of Business Administration"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1039,
+      "progname": "Master Of Education Management"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1040,
+      "progname": "Master Of Engineering Management"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1041,
+      "progname": "Master Of Public Administration"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1043,
+      "progname": "Master Of Science In Information Technology"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1033,
+      "progname": "Master in Engineering Education"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1034,
+      "progname": "Master of Arts in English"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1036,
+      "progname": "Master of Arts in Teaching"
+    },
+    {
+      "campusid": 2,
+      "campusname": "Sumacab Campus",
+      "progid": 1037,
+      "progname": "Master of Arts in Vocational - Technological Education"
+    },
+    {
+      "campusid": 12,
+      "campusname": "Talavera Campus",
+      "progid": 1001,
+      "progname": "Bachelor of Elementary Education"
+    },
+    {
+      "campusid": 12,
+      "campusname": "Talavera Campus",
+      "progid": 1008,
+      "progname": "Bachelor of Science in Business Administration"
+    },
+    {
+      "campusid": 12,
+      "campusname": "Talavera Campus",
+      "progid": 1020,
+      "progname": "Bachelor of Science in Information Technology"
+    }
+  ]
