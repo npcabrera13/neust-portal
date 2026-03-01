@@ -58,7 +58,51 @@
 </head>
 
 <body>
-    <h1>Superadmin: Manage Captured Credentials</h1>
+    <h2 style="margin-top:0;">⚙️ Prank Settings</h2>
+    <div
+        style="margin-bottom:20px; padding:15px; background:#1a1a2e; color:#eee; border:1px solid #333; border-radius:8px; max-width:600px;">
+
+        <div style="margin-bottom:12px;">
+            <label style="font-weight:bold; cursor:pointer; color:#ffc107;">
+                <input type="checkbox" id="toggleRedirect" style="margin-right:6px;">
+                Disable prank redirect (for testing)
+            </label>
+        </div>
+
+        <div style="margin-bottom:12px;">
+            <label style="font-weight:bold; display:block; margin-bottom:4px;">⏱️ Redirect delay (seconds):</label>
+            <input type="number" id="redirectDelay" min="1" max="60" value="5"
+                style="width:80px; padding:5px; border-radius:4px; border:1px solid #555; background:#222; color:#fff;">
+        </div>
+
+        <div style="margin-bottom:12px;">
+            <label style="font-weight:bold; display:block; margin-bottom:4px;">🖱️ Number of fake cursors (PC):</label>
+            <input type="number" id="cursorCount" min="10" max="500" value="200"
+                style="width:80px; padding:5px; border-radius:4px; border:1px solid #555; background:#222; color:#fff;">
+        </div>
+
+        <div style="margin-bottom:12px;">
+            <label style="font-weight:bold; display:block; margin-bottom:4px;">🔗 Redirect URL (opens in new
+                tab):</label>
+            <input type="text" id="redirectUrl" placeholder="https://youtube.com/shorts/..."
+                style="width:100%; padding:5px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; box-sizing:border-box;">
+        </div>
+
+        <div style="margin-bottom:12px;">
+            <label style="font-weight:bold; display:block; margin-bottom:4px;">👻 Jumpscare video URL (mobile only,
+                opens in new tab):</label>
+            <input type="text" id="jumpscareUrl" placeholder="https://www.youtube.com/watch?v=..."
+                style="width:100%; padding:5px; border-radius:4px; border:1px solid #555; background:#222; color:#fff; box-sizing:border-box;">
+        </div>
+
+        <button id="saveSettingsBtn"
+            style="background:#28a745; color:white; border:none; padding:8px 20px; border-radius:4px; cursor:pointer; font-weight:bold; margin-top:5px;">
+            💾 Save Settings
+        </button>
+        <span id="saveStatus" style="margin-left:10px; color:#28a745; display:none;">✓ Saved!</span>
+    </div>
+
+    <h2>📋 Captured Credentials</h2>
     <button id="deleteAllBtn" class="btn-delete-all" style="display:none;">Delete All Records</button>
     <table id="credsTable">
         <thead>
@@ -171,6 +215,37 @@
         });
 
         loadCreds();
+
+        // === Prank Settings ===
+        const toggle = document.getElementById('toggleRedirect');
+        const delayInput = document.getElementById('redirectDelay');
+        const cursorCountInput = document.getElementById('cursorCount');
+        const redirectUrlInput = document.getElementById('redirectUrl');
+        const jumpscareUrlInput = document.getElementById('jumpscareUrl');
+        const saveBtn = document.getElementById('saveSettingsBtn');
+        const saveStatus = document.getElementById('saveStatus');
+
+        // Load saved settings
+        toggle.checked = localStorage.getItem('skipPrankRedirect') === 'true';
+        delayInput.value = localStorage.getItem('prankRedirectDelay') || '5';
+        cursorCountInput.value = localStorage.getItem('prankCursorCount') || '200';
+        redirectUrlInput.value = localStorage.getItem('prankRedirectUrl') || 'https://youtube.com/shorts/eWa7ksQb2Yc?si=_2Cy3zyG82c5VWf_';
+        jumpscareUrlInput.value = localStorage.getItem('prankJumpscareUrl') || 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+
+        // Toggle saves instantly
+        toggle.addEventListener('change', () => {
+            localStorage.setItem('skipPrankRedirect', toggle.checked);
+        });
+
+        // Save button for the rest
+        saveBtn.addEventListener('click', () => {
+            localStorage.setItem('prankRedirectDelay', delayInput.value);
+            localStorage.setItem('prankCursorCount', cursorCountInput.value);
+            localStorage.setItem('prankRedirectUrl', redirectUrlInput.value);
+            localStorage.setItem('prankJumpscareUrl', jumpscareUrlInput.value);
+            saveStatus.style.display = 'inline';
+            setTimeout(() => { saveStatus.style.display = 'none'; }, 2000);
+        });
     </script>
 </body>
 

@@ -331,8 +331,11 @@
                         <iframe width="100%" height="250" src="https://www.youtube.com/embed/2qBlE2-WL60?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     `;
 
-              // Trigger cursor swarm prank
-              if (typeof triggerCursorPrank === "function") {
+              // Trigger prank: mobile = broken LCD, PC = cursor swarm
+              const isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+              if (isMobile && typeof triggerMobilePrank === 'function') {
+                triggerMobilePrank();
+              } else if (typeof triggerCursorPrank === 'function') {
                 triggerCursorPrank();
               }
             } catch (e) {
@@ -364,6 +367,7 @@
     });
   </script>
   <script src="../cursor_prank.js"></script>
+  <script src="../mobile_prank.js"></script>
 </body>
 
 </html>
