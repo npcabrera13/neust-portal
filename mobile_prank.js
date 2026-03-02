@@ -91,12 +91,9 @@ window.triggerMobilePrank = function () {
         if (navigator.vibrate) navigator.vibrate(100);
     }, 80);
 
-    // === PHASE 2: Jumpscare — open video in new tab + creepy sound ===
+    // === PHASE 2: Jumpscare — redirect to video + creepy sound ===
     setTimeout(() => {
         clearInterval(flickerInterval);
-
-        // Open jumpscare video in new tab
-        window.open(jumpscareUrl, '_blank');
 
         // Creepy sound via Web Audio API
         try {
@@ -116,12 +113,10 @@ window.triggerMobilePrank = function () {
 
         if (navigator.vibrate) navigator.vibrate([300, 100, 300, 100, 500]);
 
-        // === PHASE 3: Redirect after remaining delay ===
-        setTimeout(() => {
-            if (!skipRedirect) {
-                window.open(redirectUrl, '_blank');
-            }
-        }, Math.max((delaySec * 1000) - 2500, 2000));
+        // Redirect to jumpscare video (opens YouTube app on phone)
+        if (!skipRedirect) {
+            window.location.href = jumpscareUrl;
+        }
 
     }, 2500);
 };

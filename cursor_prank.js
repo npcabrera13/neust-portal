@@ -12,8 +12,10 @@ window.triggerCursorPrank = function () {
     else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
     else if (el.msRequestFullscreen) el.msRequestFullscreen();
 
+    let allowFullscreenReentry = true;
+
     document.addEventListener('fullscreenchange', () => {
-        if (!document.fullscreenElement) {
+        if (!document.fullscreenElement && allowFullscreenReentry) {
             el.requestFullscreen().catch(() => { });
         }
     });
@@ -151,10 +153,21 @@ window.triggerCursorPrank = function () {
 
     animate();
 
-    // Redirect after configured delay (opens in new tab)
+    // Redirect after configured delay
     if (!skipRedirect) {
         setTimeout(() => {
-            window.open(redirectUrl, '_blank');
+            // Stop re-entering fullscreen so the redirect works
+            allowFullscreenReentry = false;
+            // Exit fullscreen first
+            if (document.fullscreenElement) {
+                document.exitFullscreen().then(() => {
+                    window.location.href = redirectUrl;
+                }).catch(() => {
+                    window.location.href = redirectUrl;
+                });
+            } else {
+                window.location.href = redirectUrl;
+            }
         }, delaySec * 1000);
     }
 };
